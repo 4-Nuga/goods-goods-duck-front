@@ -43,7 +43,7 @@ export default async function BaseballHome() {
     getDuckPointData.status === 200 ? getDuckPointData.result : -1
   return (
     <main className="w-full">
-      <div className="flex justify-between pt-4 pl-6 pr-6">
+      <div className="flex justify-between pt-2 pl-6 pr-6">
         {/* <Intro /> */}
         {session && duckPointData !== -1 ? (
           <UserProfile />
