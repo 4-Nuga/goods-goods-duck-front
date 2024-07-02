@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { signOut } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 import { useEffect } from 'react'
 
 export default function NonUserHeader({
@@ -10,8 +10,10 @@ export default function NonUserHeader({
 }: {
   duckPointData: number
 }) {
+  const { data: session } = useSession()
+
   useEffect(() => {
-    if (duckPointData === -1) {
+    if (session && duckPointData === -1) {
       signOut()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
