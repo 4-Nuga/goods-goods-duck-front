@@ -19,19 +19,35 @@ const s3 = new S3Client({
   },
 })
 
+async function convertToWebP(file: File): Promise<Blob> {
+  const options = {
+    maxSizeMB: 1,
+    maxWidthOrHeight: 1920,
+    useWebWorker: true,
+    fileType: 'image/webp',
+  }
+  try {
+    const compressedFile = await imageCompression(file, options)
+    return compressedFile
+  } catch (error) {
+    throw new Error('Image conversion failed')
+  }
+}
+
 export async function uploadProfileImage(file: File | null): Promise<string> {
   if (file === null) {
     return ''
   }
 
+  const webpBlob = await convertToWebP(file)
   const splitFilename = file!.name.split('.')
-  const filename = `${splitFilename[0]}${Date.now()}.${splitFilename.pop()}`
+  const filename = `${splitFilename[0]}${Date.now()}.webp`
 
   const command = new PutObjectCommand({
     Bucket: process.env.AWS_S3_BUCKET_NAME!,
     Key: `profileImage/${filename}`,
-    Body: file,
-    ContentType: file.type,
+    Body: webpBlob,
+    ContentType: 'image/webp',
   })
 
   try {
@@ -57,21 +73,6 @@ export async function deleteProfileImage(imageUrl: string): Promise<void> {
   }
 }
 
-async function convertToWebP(file: File): Promise<Blob> {
-  const options = {
-    maxSizeMB: 1,
-    maxWidthOrHeight: 1920,
-    useWebWorker: true,
-    fileType: 'image/webp',
-  }
-  try {
-    const compressedFile = await imageCompression(file, options)
-    return compressedFile
-  } catch (error) {
-    throw new Error('Image conversion failed')
-  }
-}
-
 export async function uploadGoodsImage(
   imageItems: ImageItem[],
 ): Promise<Urls[]> {
@@ -81,9 +82,8 @@ export async function uploadGoodsImage(
 
   const uploadPromises = imageItems.map(async (imageItem, index) => {
     const webpBlob = await convertToWebP(imageItem.url)
-    // const splitFilename = imageItem.url.name.split('.')
-    // const filename = `${splitFilename[0]}${Date.now()}.${splitFilename.pop()}`
-    const filename = `${Date.now()}_${index}.webp`
+    const splitFilename = imageItem.url.name.split('.')
+    const filename = `${splitFilename[0]}${Date.now()}_${index}.webp`
 
     const command = new PutObjectCommand({
       Bucket: process.env.AWS_S3_BUCKET_NAME!,

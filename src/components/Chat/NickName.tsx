@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { useToastStore } from '../Toast/store'
 
 interface NickNameProps {
   userUuid: string
@@ -12,17 +13,17 @@ interface NicknameData {
 
 export default function NickName({ userUuid }: NickNameProps) {
   const [data, setData] = useState<NicknameData | null>(null)
+  const { showToast } = useToastStore()
 
   const fetchNickname = async () => {
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API}/v1/users-n/${userUuid}`,
-      )
-      const nickNameData = await response.json()
-      // console.log('닉네임을 받아오는데 성공', nickNameData)
-      setData(nickNameData.result)
-    } catch (error) {
-      // console.error('닉네임 가져오기 에러:', error)
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API}/v1/users-n/${userUuid}`,
+    )
+    const nickNameData = await response.json()
+
+    if (nickNameData.status === 200) setData(nickNameData.result)
+    else {
+      showToast(nickNameData.message)
     }
   }
 

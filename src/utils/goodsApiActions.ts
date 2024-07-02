@@ -40,8 +40,6 @@ export const postGoods = async (
     tags,
     images,
   }
-  console.log(inputData)
-
   const res = await fetch(`${process.env.NEXT_PUBLIC_API}/v1/goods`, {
     method: 'POST',
     headers: {
