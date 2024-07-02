@@ -71,7 +71,7 @@ export default function LikeItem({ goodsCode }: { goodsCode: string }) {
       </button>
       <Link href={`/goods/${goodsCode}`}>
         <p
-          className={`absolute z-10 top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 text-base whitespace-pre-line ${data.tradingStatus === 0 || data.tradingStatus === 1 ? 'hidden' : ''}`}
+          className={`absolute z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-base text-center text-white leading-4 whitespace-pre-line ${data.tradingStatus === 0 || data.tradingStatus === 1 ? 'hidden' : ''}`}
         >
           경매가 종료된 상품입니다.
         </p>
