@@ -13,7 +13,11 @@ export default function SearchResult() {
   }, [])
 
   if (!searchResult.goodsList.length)
-    return <p className="my-5 mx-5">검색어를 입력해주세요.</p>
+    return (
+      <div className="flex justify-center mt-4">
+        <p className="">검색어를 입력해주세요.</p>
+      </div>
+    )
 
   return (
     <>

@@ -90,7 +90,7 @@ export default function SearchForm() {
         )}
         <FiSearch
           onClick={() => handleKeywordInput(keyword, getPathIndex(pathname))}
-          className="absolute top-[10px] right-1 text-sky-600 text-3xl mx-3"
+          className="absolute top-[10px] right-1 text-sky-600 text-2xl mx-3"
         />
       </div>
       {keyword && relatedKeyword && (

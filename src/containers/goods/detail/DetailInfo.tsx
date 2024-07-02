@@ -30,10 +30,10 @@ export default function DetailInfo({
         <p className="text-[20px]">{goodsDetail.name}</p>
         <LikeBtn goodsCode={goodsDetail.goodsCode} />
       </div>
-      <div className="flex justify-between items-end">
-        <div className="mt-[15px] leading-[30px]">
-          <p className="text-[16px] text-[#989898]">경매 시작가</p>
-          <p className="pt-[2px] text-[34px] font-semibold">
+      <div className="flex justify-between mt-1 items-end">
+        <div className="flex flex-col mb-2">
+          <p className="text-[15px] text-[#989898]">경매 시작가</p>
+          <p className="text-[17px] font-semibold">
             {goodsDetail.minPrice.toLocaleString()}{' '}
             <span className="text-[20px] font-normal">원</span>
           </p>

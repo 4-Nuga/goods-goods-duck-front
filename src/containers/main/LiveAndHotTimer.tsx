@@ -57,7 +57,7 @@ export default function LiveAndHotTimer({
   return (
     <p className="bg-[#5D5FEF] bg-opacity-15 px-[22px] py-[8px] text-[#5D5FEF] rounded-full text-[17px] font-bold">
       <span
-        className={`pr-[5px] ${isRunning ? ' text-[14px]' : ' text-[17px]'}`}
+        className={`pr-[5px] ${isRunning ? ' text-[17px]' : ' text-[17px]'}`}
       >
         {' '}
         {isRunning ? `${title}` : title}

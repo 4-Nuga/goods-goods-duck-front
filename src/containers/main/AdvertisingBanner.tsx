@@ -12,7 +12,7 @@ import 'swiper/css/pagination'
 import { BannerType } from '@/types/mainType'
 import '@/styles/swiper.css'
 
-export default function AdvertisingBanner() {
+export default function  AdvertisingBanner() {
   const pathname = usePathname()
   SwiperCore.use([Navigation, Autoplay])
 
@@ -88,7 +88,7 @@ export default function AdvertisingBanner() {
   ]
 
   return (
-    <div className="pt-[20px] px-[20px] pb-[25px]">
+    <div className="pt-[12px] px-[20px] pb-[25px]">
       <Swiper
         modules={[Navigation]}
         spaceBetween={0}
