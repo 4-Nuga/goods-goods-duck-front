@@ -19,7 +19,7 @@ export default function BidContent({ goods }: { goods: BidType }) {
         <div className="py-4 px-3 w-full">
           <p className="truncate w-full mb-3">{goods.name}</p>
           <div className="text-[12px] bg-yellow-400 text-white flex justify-center items-center rounded-full px-[10px] py-3 text-sm truncate">
-            <span className="text-[12px] text-gray-700 truncate">
+            <span className="text-[12px] text-gray-700">
               {goods.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원
             </span>{' '}
             에 입찰했어요

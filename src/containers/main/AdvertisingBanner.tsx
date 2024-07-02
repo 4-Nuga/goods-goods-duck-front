@@ -12,7 +12,7 @@ import 'swiper/css/pagination'
 import { BannerType } from '@/types/mainType'
 import '@/styles/swiper.css'
 
-export default function  AdvertisingBanner() {
+export default function AdvertisingBanner() {
   const pathname = usePathname()
   SwiperCore.use([Navigation, Autoplay])
 

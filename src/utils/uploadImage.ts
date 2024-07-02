@@ -3,6 +3,7 @@ import {
   PutObjectCommand,
   DeleteObjectCommand,
 } from '@aws-sdk/client-s3'
+import imageCompression from 'browser-image-compression'
 import { ImageItem } from '@/containers/goods/registration/store'
 
 interface Urls {
@@ -56,6 +57,21 @@ export async function deleteProfileImage(imageUrl: string): Promise<void> {
   }
 }
 
+async function convertToWebP(file: File): Promise<Blob> {
+  const options = {
+    maxSizeMB: 1,
+    maxWidthOrHeight: 1920,
+    useWebWorker: true,
+    fileType: 'image/webp',
+  }
+  try {
+    const compressedFile = await imageCompression(file, options)
+    return compressedFile
+  } catch (error) {
+    throw new Error('Image conversion failed')
+  }
+}
+
 export async function uploadGoodsImage(
   imageItems: ImageItem[],
 ): Promise<Urls[]> {
@@ -64,14 +80,16 @@ export async function uploadGoodsImage(
   }
 
   const uploadPromises = imageItems.map(async (imageItem, index) => {
-    const splitFilename = imageItem.url.name.split('.')
-    const filename = `${splitFilename[0]}${Date.now()}.${splitFilename.pop()}`
+    const webpBlob = await convertToWebP(imageItem.url)
+    // const splitFilename = imageItem.url.name.split('.')
+    // const filename = `${splitFilename[0]}${Date.now()}.${splitFilename.pop()}`
+    const filename = `${Date.now()}_${index}.webp`
 
     const command = new PutObjectCommand({
       Bucket: process.env.AWS_S3_BUCKET_NAME!,
       Key: `productImage/${filename}`,
-      Body: imageItem.url,
-      ContentType: imageItem.url.type,
+      Body: webpBlob,
+      ContentType: 'image/webp',
     })
 
     try {
