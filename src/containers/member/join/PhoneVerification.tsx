@@ -42,7 +42,7 @@ export default function PhoneVerification() {
   const [messageMinutes, setMessageMinutes] = useState<number>(0)
   const [messageSeconds, setMessageSeconds] = useState<number>(0)
 
-  const { isClosed, showAlert } = useBasicAlertStore()
+  const { isClosed, showAlert, setIsClosed } = useBasicAlertStore()
 
   const phoneInputRef = useRef<HTMLInputElement>(null)
 
@@ -146,11 +146,13 @@ export default function PhoneVerification() {
   useEffect(() => {
     if (isClosed) {
       if (notValidPhone === 4) {
+        setIsClosed(false)
         resetJoinState()
         router.push('/login')
       }
     }
     if (isClosed && isChecked) {
+      setIsClosed(false)
       sendSocialData()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

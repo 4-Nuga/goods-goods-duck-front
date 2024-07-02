@@ -14,7 +14,7 @@ export default function GoodsItem({
         <LikeBtn goodsCode={goodsItemData.goodsCode} />
         <Link href={`/goods/${goodsItemData.goodsCode}`}>
           <p
-            className={`absolute z-10 top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center text-[17px] whitespace-pre-line ${goodsItemData.tradingStatus === 0 || goodsItemData.tradingStatus === 1 ? 'hidden' : ''}`}
+            className={`absolute z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-base text-center text-white leading-4 whitespace-pre-line ${goodsItemData.tradingStatus === 0 || goodsItemData.tradingStatus === 1 ? 'hidden' : ''}`}
           >
             경매가 종료된 상품입니다.
           </p>
@@ -24,7 +24,7 @@ export default function GoodsItem({
               width={0}
               height={0}
               sizes="100vw"
-              className={`rounded-t-2xl max-h-[300px] w-full h-auto object-cover aspect-square ${goodsItemData.tradingStatus === 0 || goodsItemData.tradingStatus === 1 ? '' : 'grayscale'}`}
+              className={`rounded-t-2xl max-h-[300px] w-full h-auto object-cover aspect-square ${goodsItemData.tradingStatus === 0 || goodsItemData.tradingStatus === 1 ? '' : 'grayscale-[50%]'}`}
               alt="굿즈 이미지"
             />
           )}
@@ -35,7 +35,7 @@ export default function GoodsItem({
                 width={0}
                 height={0}
                 sizes="100vw"
-                className={`rounded-t-2xl max-h-[300px] w-full h-auto object-cover aspect-square ${goodsItemData.tradingStatus === 0 || goodsItemData.tradingStatus === 1 ? '' : 'grayscale'}`}
+                className={`rounded-t-2xl max-h-[300px] w-full h-auto object-cover aspect-square ${goodsItemData.tradingStatus === 0 || goodsItemData.tradingStatus === 1 ? '' : 'grayscale-[50%]'}`}
                 alt="굿즈 이미지"
               />
             </div>
@@ -43,20 +43,19 @@ export default function GoodsItem({
         </Link>
       </div>
       <Link href={`/goods/${goodsItemData.goodsCode}`}>
-        <div className="px-[20px] py-[20px]">
-          <p className="truncate text-[15px]">{goodsItemData.goodsName}</p>
-          <p className="mt-[5px] text-[19px] font-medium truncate">
-            {goodsItemData.minPrice.toLocaleString()}{' '}
-            <span className="text-[17px]">원</span>
+        <div className="px-3">
+          <p className="truncate text-[15px] h-8">{goodsItemData.goodsName}</p>
+          <p className="text-[19px] truncate h-10">
+            {goodsItemData.minPrice.toLocaleString()} 원
           </p>
           {goodsItemData.tradingStatus === 0 && (
-            <p className="text-sm text-stone-500">경매 전</p>
+            <p className="text-sm text-stone-500 h-6">경매 전</p>
           )}
           {goodsItemData.tradingStatus === 1 && (
-            <p className="text-sm text-stone-500">경매 중</p>
+            <p className="text-sm text-stone-500 h-6">경매 중</p>
           )}
           {goodsItemData.tradingStatus >= 2 && (
-            <p className="text-sm text-stone-500">경매종료</p>
+            <p className="text-sm text-stone-500 h-6">경매종료</p>
           )}
         </div>
       </Link>

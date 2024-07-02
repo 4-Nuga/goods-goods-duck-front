@@ -3,7 +3,7 @@
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { FaArrowLeft } from 'react-icons/fa'
-import { IoHome } from 'react-icons/io5'
+import { TbSmartHome } from 'react-icons/tb'
 import { useNavStore } from '@/components/layout/store'
 
 interface NameType {
@@ -109,8 +109,8 @@ export default function MyPageHeader() {
         className="flex-[2] flex items-center justify-center"
         aria-label="홈"
       >
-        <IoHome
-          className="hover:bg-gray-200 w-5 h-5"
+        <TbSmartHome
+          className="hover:bg-gray-200 w-7 h-7"
           id="홈"
           onClick={() => router.push(`/${currentPage}`)}
         />

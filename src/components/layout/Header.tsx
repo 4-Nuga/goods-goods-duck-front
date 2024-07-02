@@ -9,25 +9,11 @@ import { useHeaderModalState } from '@/components/layout/store'
 import Category from '@/containers/category/Category'
 import SearchModal from '@/containers/main/search/SearchModal'
 import Logo from '@/public/svgs/header/logo.svg'
-// import { getNotiCount } from '@/utils/notificationApiActions'
 
 export default function Header() {
-  // const [num, setNum] = useState<number>(0)
   const [visible, setVisible] = useState<boolean>(false)
   const pathname = usePathname()
   const { search, setSearch } = useHeaderModalState()
-
-  // useEffect(() => {
-  //   const getCount = async () => {
-  //     const data = await getNotiCount()
-
-  //     if (data.status === 200) {
-  //       setNum(data.result)
-  //     }
-  //   }
-
-  //   getCount()
-  // }, [])
 
   if (pathname.startsWith(`/goods/`) || pathname === '/') return null
 
@@ -48,10 +34,10 @@ export default function Header() {
         </div>
       </button>
       {visible && <Category setVisible={setVisible} />}
-      <div className="flex justify-center items-center mr-3">
+      <div className="flex justify-center items-center">
         <Link
           href="/notification"
-          className="hover:bg-gray-200 relative w-full h-full flex justify-center items-center"
+          className="hover:bg-gray-200 relative w-full h-full flex justify-center items-center mx-4"
         >
           <FiBell className="text-sky-600 text-3xl" />
           {/* {num > 0 && (
@@ -60,10 +46,12 @@ export default function Header() {
             </span>
           )} */}
         </Link>
-        <FiSearch
-          onClick={() => setSearch(true)}
-          className="hover:bg-gray-200 w-full h-full text-sky-600 text-4xl mx-3"
-        />
+        <div className="hover:bg-gray-200 relative w-full h-full flex justify-center items-center mr-6">
+          <FiSearch
+            onClick={() => setSearch(true)}
+            className="text-sky-600 text-3xl"
+          />
+        </div>
       </div>
       {search && <SearchModal />}
     </header>

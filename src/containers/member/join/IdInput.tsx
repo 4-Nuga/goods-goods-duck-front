@@ -104,7 +104,7 @@ export default function IdInput() {
       )}
       {notValidId === 1 && (
         <p className="text-red-500 text-xs mt-1 ml-3">
-          * 영문과 숫자를 조합한 6~15자의 닉네임을 입력해주세요.
+          * 영문과 숫자를 조합한 6~15자의 아이디를 입력해주세요.
         </p>
       )}
       {notValidId === 2 && (

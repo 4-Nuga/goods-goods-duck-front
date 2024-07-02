@@ -2,6 +2,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 import { LiaHeart, LiaHeartSolid } from 'react-icons/lia'
+import { useBasicAlertStore } from '@/components/Modal/store'
 import { useToastStore } from '@/components/Toast/store'
 import { addLike, deleteLike, getLikeWhether } from '@/utils/mainApiActions'
 
@@ -9,11 +10,12 @@ export default function LikeBtn({ goodsCode }: { goodsCode: string }) {
   const { data: session } = useSession()
   const router = useRouter()
   const [isLiked, setIsLiked] = useState<boolean>(false)
+  const { isClosed, setIsClosed, showAlert } = useBasicAlertStore()
   const { showToast } = useToastStore()
   const pathname = usePathname()
 
   const handleLike = async () => {
-    if (session?.user.accessToken === undefined) {
+    if (!session) {
       router.push(`/login?callbackUrl=${window.location.href}`)
     } else {
       const whether = await getLikeWhether(goodsCode)
@@ -31,12 +33,20 @@ export default function LikeBtn({ goodsCode }: { goodsCode: string }) {
           }
         }
       } else if (whether.status === 401) {
-        showToast('로그인이 필요한 서비스입니다.')
+        showAlert('로그인이 필요한 서비스입니다.')
       } else {
         showToast(whether.message)
       }
     }
   }
+
+  useEffect(() => {
+    if (isClosed) {
+      setIsClosed(false)
+      router.push(`/login?callbackUrl=${window.location.href}`)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isClosed])
 
   useEffect(() => {
     const getData = async () => {
@@ -47,7 +57,7 @@ export default function LikeBtn({ goodsCode }: { goodsCode: string }) {
     }
     getData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [session])
   return (
     <button
       type="button"

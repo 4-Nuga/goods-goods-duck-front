@@ -50,7 +50,7 @@ export default function Category({
           <span className="hidden">뒤로가기</span>
           <BackBtn />
         </button>
-        <h1 className="whitespace-pre-line mt-[70px] ml-[30px] text-[30px] tracking-[-0.1rem] font-semibold leading-[40px]">
+        <h1 className="whitespace-pre-line ml-[30px] text-[30px] tracking-[-0.1rem] font-semibold leading-[40px]">
           {text}
         </h1>
         <div className="mt-[30px] mx-[20px] relative">

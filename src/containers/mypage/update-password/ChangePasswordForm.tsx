@@ -23,7 +23,7 @@ export default function ChangePasswordForm() {
     setNotMatchPassword,
     resetError,
   } = usePasswordErrorStore()
-  const { showAlert, isClosed } = useBasicAlertStore()
+  const { showAlert, isClosed, setIsClosed } = useBasicAlertStore()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -42,7 +42,10 @@ export default function ChangePasswordForm() {
   }
 
   useEffect(() => {
-    if (isClosed) router.push('/mypage')
+    if (isClosed) {
+      setIsClosed(false)
+      router.push('/mypage')
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isClosed])
 

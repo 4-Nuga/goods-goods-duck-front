@@ -11,15 +11,15 @@ export default function WinningTab() {
       title: '전체',
     },
     {
-      status: 1,
+      status: 3,
       title: '낙찰',
     },
     {
-      status: 2,
+      status: 4,
       title: '거래완료',
     },
     {
-      status: 3,
+      status: 5,
       title: '거래취소',
     },
   ]

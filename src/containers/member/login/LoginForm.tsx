@@ -213,7 +213,7 @@ export default function LoginForm() {
         </span>
         <span>
           <Link href={`/${currentPage}`} aria-label="찾기" className="text-xs">
-            홈으로
+            To Home
           </Link>
         </span>
       </div>
