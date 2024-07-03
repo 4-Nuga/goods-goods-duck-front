@@ -16,7 +16,7 @@ export default async function Join() {
       <div
         className={`${poppins.className} h-16 font-bold text-3xl leading-[30px] text-center text-[#032426] mx-14 mt-28`}
       >
-        JOIN US
+        WELCOME
       </div>
       <JoinFormArea />
     </>

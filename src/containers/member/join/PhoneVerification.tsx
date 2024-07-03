@@ -75,7 +75,9 @@ export default function PhoneVerification() {
     if (data.status === 409) {
       if (provider) {
         setIsChecked(true)
-        return showAlert('기존 계정에 연결하시겠습니까?')
+        return showAlert(
+          '기존 계정에 연결합니다. 앞으로 2가지 로그인을 모두 사용할 수 있습니다.',
+        )
       }
       setNotValidPhone(4)
       return showAlert(`${data.message}\n로그인 페이지로 이동하시겠습니까?`)
@@ -160,19 +162,16 @@ export default function PhoneVerification() {
 
   return (
     <>
-      <div className="w-full h-14 rounded-3xl my-7">
+      <div className="w-full h-14 rounded-3xl my-14">
+        <label htmlFor="휴대폰 인증" className="text-sm">
+          <span className="text-xs text-red-500">*</span> 휴대폰 인증
+        </label>
         <span className="flex relative w-full h-full">
-          <label
-            htmlFor="휴대폰 인증"
-            className="overflow-hidden absolute w-px h-px text-[0px]"
-          >
-            휴대폰 인증
-          </label>
           <input
             id="휴대폰 인증"
             ref={phoneInputRef}
             type="text"
-            placeholder="휴대폰"
+            placeholder="'-'는 빼고 입력해주세요."
             autoComplete="off"
             maxLength={20}
             value={phoneNumber}
@@ -201,18 +200,18 @@ export default function PhoneVerification() {
         </span>
         {notValidPhone === 1 && (
           <p className="text-red-500 text-xs mt-1 ml-3">
-            핸드폰 번호를 확인해주세요.
+            * 핸드폰 번호를 확인해주세요.
           </p>
         )}
         {notValidPhone === 2 && (
           <p className="text-red-500 text-xs mt-1 ml-3">
-            인증번호 발송횟수를 초과하였습니다. 잠시 후 다시 인증을
+            * 인증번호 발송횟수를 초과하였습니다. 잠시 후 다시 인증을
             시도해주세요.
           </p>
         )}
         {notValidPhone === 3 && (
           <p className="text-red-500 text-xs mt-1 ml-3">
-            인증번호 입력시간을 초과하였습니다. 인증번호 재전송 후 다시
+            * 인증번호 입력시간을 초과하였습니다. 인증번호 재전송 후 다시
             입력해주세요.
           </p>
         )}
