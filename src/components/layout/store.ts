@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 
 interface ModalState {
   search: boolean
@@ -18,8 +19,14 @@ export const useHeaderModalState = create<ModalState>((set) => ({
   setSearch: (search) => set({ search }),
 }))
 
-export const useNavStore = create<NavState>((set) => ({
-  currentPage: '',
-
-  setCurrentPage: (currentPage) => set({ currentPage }),
-}))
+export const useNavStore = create(
+  persist<NavState>(
+    (set) => ({
+      currentPage: '',
+      setCurrentPage: (currentPage) => set({ currentPage }),
+    }),
+    {
+      name: 'currentPageStorage',
+    },
+  ),
+)
