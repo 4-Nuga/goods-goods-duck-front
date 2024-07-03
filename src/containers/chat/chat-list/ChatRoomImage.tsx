@@ -34,7 +34,7 @@ export default function ChatRoomImage({ goodsCode }: { goodsCode: string }) {
     getData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-  // console.log(goodsCode,"?",ImageUrl)
+
   return (
     <>
       <Image

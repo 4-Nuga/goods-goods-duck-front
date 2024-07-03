@@ -103,7 +103,6 @@ export default function GoodsForm() {
       redirect(`/${currentPage}`)
     }
 
-    console.log(data.status)
     resetGoodsState()
     resetImagesState()
     resetTagsState()
