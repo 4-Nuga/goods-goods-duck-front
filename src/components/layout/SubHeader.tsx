@@ -45,7 +45,7 @@ export default function SubHeader({ pageTitle }: { pageTitle: string }) {
         onClick={() => setSearch(true)}
         className={`text-gray-500 hover:text-gray-700 ${pageTitle === '전체' ? '' : 'invisible'}`}
       >
-        <FiSearch className="text-sky-600 text-3xl" />
+        <FiSearch className="text-black-600 text-3xl" />
       </button>
       {search && <SearchModal />}
     </header>

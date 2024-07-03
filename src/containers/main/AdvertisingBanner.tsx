@@ -67,11 +67,6 @@ export default function AdvertisingBanner() {
       image: `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/banner-notice2.webp`,
       url: `${rootUrl}/mypage/notice/5`,
     },
-    {
-      id: 5,
-      image: `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/banner-idol1.webp`,
-      url: `${rootUrl}/mypage/notice/7`,
-    },
   ]
 
   const bannerAnimation = [
