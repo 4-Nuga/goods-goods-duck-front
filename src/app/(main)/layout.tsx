@@ -1,4 +1,4 @@
-import Header from '@/components/layout/Header'
+// import Header from '@/components/layout/Header'
 import Nav from '@/components/layout/Nav'
 import RegistrationBtn from '@/components/layout/RegistrationBtn'
 import UpNav from '@/components/layout/UpNav'
@@ -10,7 +10,6 @@ export default function Layout({
 }>) {
   return (
     <>
-      <Header />
       {children}
       <Nav />
       <UpNav />

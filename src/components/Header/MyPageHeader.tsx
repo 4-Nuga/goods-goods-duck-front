@@ -2,8 +2,7 @@
 
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { FaArrowLeft } from 'react-icons/fa'
-import { TbSmartHome } from 'react-icons/tb'
+import { TbSmartHome, TbArrowLeft } from 'react-icons/tb'
 import { useNavStore } from '@/components/layout/store'
 
 interface NameType {
@@ -91,13 +90,10 @@ export default function MyPageHeader() {
   }, [])
 
   return (
-    <div className="w-full h-[50px] flex">
-      <span
-        className="w-[15%] flex items-center justify-center"
-        aria-label="뒤로가기"
-      >
-        <FaArrowLeft
-          className="hover:bg-gray-200 w-5 h-5"
+    <div className="flex justify-between items-center py-4 px-4 bg-white shadow-md">
+      <span className="flex items-center justify-center" aria-label="뒤로가기">
+        <TbArrowLeft
+          className="hover:bg-gray-200 text-3xl"
           id="뒤로가기"
           onClick={() => router.back()}
         />
@@ -105,12 +101,9 @@ export default function MyPageHeader() {
       <span className="flex-[8] flex items-center justify-center text-lg">
         {title}
       </span>
-      <span
-        className="flex-[2] flex items-center justify-center"
-        aria-label="홈"
-      >
+      <span className="items-center justify-center" aria-label="홈">
         <TbSmartHome
-          className="hover:bg-gray-200 w-7 h-7"
+          className="hover:bg-gray-200 text-3xl"
           id="홈"
           onClick={() => router.push(`/${currentPage}`)}
         />
