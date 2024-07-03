@@ -1,5 +1,11 @@
-import BidTab from '@/components/Tab/BidTab'
+import BidList from '@/containers/mypage/bid/BidList'
+import BidTab from '@/containers/mypage/bid/BidTab'
 
 export default function Bid() {
-  return <BidTab />
+  return (
+    <>
+      <BidTab />
+      <BidList />
+    </>
+  )
 }

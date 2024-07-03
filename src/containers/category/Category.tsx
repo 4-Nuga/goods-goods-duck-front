@@ -1,15 +1,11 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import Image from 'next/image'
+import Link from 'next/link'
 import { useState } from 'react'
-import Animation from '@/public/svgs/category/animation.svg'
-import AnimationColor from '@/public/svgs/category/animationColor.svg'
+import { useLocalCategoryStore } from '@/containers/main/store'
 import AnimationGo from '@/public/svgs/category/animationGo.svg'
-import Baseball from '@/public/svgs/category/baseball.svg'
-import BaseballColor from '@/public/svgs/category/baseballColor.svg'
 import BaseballGo from '@/public/svgs/category/baseballGo.svg'
-import Kpop from '@/public/svgs/category/kpop.svg'
-import KpopColor from '@/public/svgs/category/kpopColor.svg'
 import KpopGo from '@/public/svgs/category/kpopGo.svg'
 import BackBtn from '@/public/svgs/icon/backBtn.svg'
 
@@ -18,7 +14,7 @@ export default function Category({
 }: {
   setVisible: React.Dispatch<React.SetStateAction<boolean>>
 }) {
-  const router = useRouter()
+  const { setCategory } = useLocalCategoryStore()
   const [itemPosition, setItemPosition] = useState([
     { id: 1, pos: false },
     { id: 2, pos: false },
@@ -37,59 +33,146 @@ export default function Category({
     setItemPosition(newPosition)
   }
 
+  const handleCategory = (item: string) => {
+    localStorage.setItem('category', item)
+    setCategory(item)
+    setVisible(false)
+  }
+
   return (
-    <div className="w-screen h-screen z-30 top-0 left-0 fixed bg-white">
-      <div
-        onClick={() => setVisible(false)}
-        role="none"
-        className="mt-[20px] pl-[20px]"
-      >
-        <BackBtn />
-      </div>
-      <h1 className="whitespace-pre-line mt-[70px] ml-[30px] text-[30px] tracking-[-0.1rem] font-semibold leading-[40px]">
-        {text}
-      </h1>
-      <div className="mt-[30px] mx-[20px] relative">
-        <div
-          className={`relative w-full aspect-square overflow-hidden transition-all ease-out 0.5s ${itemPosition[0].pos ? 'h-auto' : 'h-[145px]'}`}
-          role="none"
-          onClick={() => handlePosition(1)}
+    <div className="w-screen h-screen z-30 top-0 left-0 mb-[100px] fixed bg-white">
+      <div className="w-full h-full overflow-scroll">
+        <button
+          onClick={() => setVisible(false)}
+          type="button"
+          className="mt-[20px] pl-[20px]"
         >
-          {itemPosition[0].pos ? <KpopColor /> : <Kpop />}
+          <span className="hidden">뒤로가기</span>
+          <BackBtn />
+        </button>
+        <h1 className="whitespace-pre-line ml-[30px] text-[30px] tracking-[-0.1rem] font-semibold leading-[40px]">
+          {text}
+        </h1>
+        <div className="mt-[30px] mx-[20px] relative">
           <div
-            className="absolute left-[20px] top-[220px]"
-            role="none"
-            onClick={() => router.push('/')}
+            className={`relative w-full aspect-square transition-all ease-out 0.5s ${itemPosition[0].pos ? 'h-auto' : 'h-[145px]'}`}
           >
-            <KpopGo />
+            <button
+              className="w-full h-full"
+              type="button"
+              onClick={() => handlePosition(1)}
+            >
+              {itemPosition[0].pos ? (
+                <Image
+                  src={`https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/idolColor.png`}
+                  alt="idol-color"
+                  width={0}
+                  height={0}
+                  sizes="100vw"
+                  style={{ width: '100%', height: 'auto' }}
+                />
+              ) : (
+                <Image
+                  src={`https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/idol.png`}
+                  alt="idol"
+                  width={0}
+                  height={0}
+                  sizes="100vw"
+                  style={{ width: '100%', height: 'auto' }}
+                />
+              )}
+            </button>
+            {itemPosition[0].pos && (
+              <Link
+                href="/idol"
+                className="absolute left-[20px] bottom-[50px]"
+                type="button"
+                onClick={() => handleCategory('idol')}
+              >
+                <span className="sr-only">아이돌</span>
+                <KpopGo />
+              </Link>
+            )}
           </div>
-        </div>
-        <div
-          className={`relative w-full aspect-square transition-all ease-out 0.5s ${itemPosition[1].pos ? 'h-auto' : 'h-[145px]'}`}
-          role="none"
-          onClick={() => handlePosition(2)}
-        >
-          {itemPosition[1].pos ? <BaseballColor /> : <Baseball />}
           <div
-            className="absolute left-[20px] top-[220px]"
-            role="none"
-            onClick={() => router.push('/')}
+            className={`relative w-full aspect-square transition-all ease-out 0.5s ${itemPosition[1].pos ? 'h-auto' : 'h-[145px]'}`}
           >
-            <BaseballGo />
+            <button
+              className="w-full h-full"
+              type="button"
+              onClick={() => handlePosition(2)}
+            >
+              {itemPosition[1].pos ? (
+                <Image
+                  src={`https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/baseballColor.png`}
+                  alt="baseball-color"
+                  width={0}
+                  height={0}
+                  sizes="100vw"
+                  style={{ width: '100%', height: 'auto' }}
+                />
+              ) : (
+                <Image
+                  src={`https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/baseball.png`}
+                  alt="baseball"
+                  width={0}
+                  height={0}
+                  sizes="100vw"
+                  style={{ width: '100%', height: 'auto' }}
+                />
+              )}
+            </button>
+            {itemPosition[1].pos && (
+              <Link
+                href="/baseball"
+                className="absolute left-[20px] bottom-[50px]"
+                type="button"
+                onClick={() => handleCategory('baseball')}
+              >
+                <span className="sr-only">야구</span>
+                <BaseballGo />
+              </Link>
+            )}
           </div>
-        </div>
-        <div
-          className={`relative w-full aspect-square transition-all ease-out 0.5s ${itemPosition[2].pos ? 'h-auto' : 'h-[160px]'}`}
-          role="none"
-          onClick={() => handlePosition(3)}
-        >
-          {itemPosition[2].pos ? <AnimationColor /> : <Animation />}
           <div
-            className="absolute left-[20px] top-[220px]"
-            role="none"
-            onClick={() => router.push('/')}
+            className={`relative w-full aspect-square transition-all ease-out 0.5s ${itemPosition[2].pos ? 'h-auto' : 'h-[160px]'}`}
           >
-            <AnimationGo />
+            <button
+              className="w-full h-full"
+              type="button"
+              onClick={() => handlePosition(3)}
+            >
+              {itemPosition[2].pos ? (
+                <Image
+                  src={`https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/animationColor.png`}
+                  alt="animation-color"
+                  width={0}
+                  height={0}
+                  sizes="100vw"
+                  style={{ width: '100%', height: 'auto' }}
+                />
+              ) : (
+                <Image
+                  src={`https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/animation.png`}
+                  alt="animation"
+                  width={0}
+                  height={0}
+                  sizes="100vw"
+                  style={{ width: '100%', height: 'auto' }}
+                />
+              )}
+            </button>
+            {itemPosition[2].pos && (
+              <Link
+                href="/animation"
+                className="absolute left-[20px] bottom-[50px]"
+                type="button"
+                onClick={() => handleCategory('animation')}
+              >
+                <span className="sr-only">애니메이션</span>
+                <AnimationGo />
+              </Link>
+            )}
           </div>
         </div>
       </div>

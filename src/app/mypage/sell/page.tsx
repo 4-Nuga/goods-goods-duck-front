@@ -1,5 +1,11 @@
-import SellTab from '@/components/Tab/SellTab'
+import SellList from '@/containers/mypage/sell/SellList'
+import SellTab from '@/containers/mypage/sell/SellTab'
 
 export default function Sell() {
-  return <SellTab />
+  return (
+    <>
+      <SellTab />
+      <SellList />
+    </>
+  )
 }

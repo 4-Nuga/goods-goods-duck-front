@@ -1,3 +1,5 @@
-export default function Like() {
-  return <>좋아요</>
+import LikeList from '@/containers/mypage/like/LikeList'
+
+export default async function Like() {
+  return <LikeList />
 }

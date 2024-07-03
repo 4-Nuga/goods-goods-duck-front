@@ -1,13 +1,5 @@
-import UpdateFavCategory from '@/containers/mypage/UpdateFavCategory'
-import UpdateNickname from '@/containers/mypage/UpdateNickname'
-import UpdateProfileImage from '@/containers/mypage/UpdateProfileImage'
+import UpdateProfileForm from '@/containers/mypage/update-profile/UpdateProfileForm'
 
 export default function UpdateProfile() {
-  return (
-    <>
-      <UpdateProfileImage />
-      <UpdateNickname />
-      <UpdateFavCategory />
-    </>
-  )
+  return <UpdateProfileForm />
 }

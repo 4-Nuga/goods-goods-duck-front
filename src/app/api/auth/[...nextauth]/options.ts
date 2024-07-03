@@ -13,8 +13,8 @@ export const options: NextAuthOptions = {
       },
 
       async authorize(credentials) {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_MEMBER}/v1/users-n/login`,
+        const loginResponse = await fetch(
+          `${process.env.NEXT_PUBLIC_API}/v1/auth-n/login`,
           {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -22,12 +22,26 @@ export const options: NextAuthOptions = {
           },
         )
 
-        if (res.ok) {
-          const user = await res.json()
-          return user.result
+        const loginRes = await loginResponse.json()
+
+        if (loginRes.status !== 200) {
+          return null
         }
 
-        return null
+        const userResponse = await fetch(
+          `${process.env.NEXT_PUBLIC_API}/v1/users-n/${loginRes.result.uuid}`,
+        )
+
+        const userRes = await userResponse.json()
+
+        if (userRes.status !== 200) {
+          return null
+        }
+
+        return {
+          ...loginRes.result,
+          ...userRes.result,
+        }
       },
     }),
     KakaoProvider({
@@ -39,46 +53,69 @@ export const options: NextAuthOptions = {
     async signIn({ user, profile }) {
       if (profile) {
         // 회원인지 아닌지 확인
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_MEMBER}/v1/users-n/social-login`,
+        const loginResponse = await fetch(
+          `${process.env.NEXT_PUBLIC_API}/v1/auth-n/social-login`,
           {
-            method: 'GET',
+            method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              socialCode: user.id,
+              memberCode: user.id,
             }),
           },
         )
 
-        const data = await res.json()
+        const loginRes = await loginResponse.json()
 
-        if (data.status === 404) {
+        if (loginRes.status === 404) {
           if ('kakao_account' in profile) {
             return `/join?id=${user.id}&provider=kakao`
           }
+        } else if (loginRes.status !== 200) {
+          return false
         }
-        if (data.status === 200) {
-          user.accessToken = data.result.accessToken
-          user.refreshToken = data.result.refreshToken
-          return true
+
+        const userResponse = await fetch(
+          `${process.env.NEXT_PUBLIC_API}/v1/users-n/${loginRes.result.uuid}`,
+        )
+
+        const userRes = await userResponse.json()
+
+        if (userRes.status !== 200) {
+          return false
         }
-        return false
+
+        user.uuid = loginRes.uuid
+        user.accessToken = loginRes.accessToken
+        user.refreshToken = loginRes.refreshToken
+        user.profileImage = userRes.profileImage
+        user.nickname = userRes.nickname
+        user.favCategory = userRes.favCategory
+        return true
       }
+
       return true
     },
-    async jwt({ user, token }) {
+    async jwt({ token, user, trigger, session }) {
+      if (trigger === 'update' && session !== null) {
+        token.profileImage = session.image
+        token.nickname = session.nickname
+        token.favCategory = session.favoriteCategory
+      }
       return { ...token, ...user }
     },
     async session({ session, token }) {
-      session.user.accessToken = token.result.accessToken
-      session.user.refreshToken = token.result.accessToken
-      return { ...session, ...token }
+      session.user.image = token.profileImage
+      session.user.uuid = token.uuid
+      session.user.accessToken = token.accessToken
+      session.user.refreshToken = token.refreshToken
+      session.user.nickname = token.nickname
+      session.user.favoriteCategory = token.favCategory
+      return { ...session }
     },
   },
   pages: {
     signIn: '/login',
-    error: '/auth_error',
   },
 }
