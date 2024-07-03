@@ -13,13 +13,15 @@ export default function UserProfile() {
           `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/basicImage.png`
         }
         alt="profile"
-        width={55}
-        height={55}
+        width={45}
+        height={45}
         className="rounded-full aspect-square"
       />
-      <div className="pl-[20px] content-center items-center">
-        <p className="text-[#919BB2] text-[15px]">Hello!</p>
-        <p className="text-[18px]">{session?.user.nickname}</p>
+      <div className="pl-[15px] content-center items-center">
+        <p className="text-[15px]">안녕하세요</p>
+        <p className="text-[15px]">
+          <span className="text-blue-600">{session?.user.nickname}</span>님
+        </p>
       </div>
     </div>
   )

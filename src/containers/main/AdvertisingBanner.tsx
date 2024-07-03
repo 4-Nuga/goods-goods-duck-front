@@ -88,7 +88,7 @@ export default function AdvertisingBanner() {
   ]
 
   return (
-    <div className="pt-[20px] px-[20px] pb-[25px]">
+    <div className="pt-[12px] px-[20px] pb-[25px]">
       <Swiper
         modules={[Navigation]}
         spaceBetween={0}

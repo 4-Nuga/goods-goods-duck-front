@@ -55,21 +55,21 @@ export default function Timer({
   }, [status, time])
 
   return (
-    <p className="text-[21px]">
+    <div className="flex text-[17px]">
       <span
-        className={`pr-[5px] ${isRunning ? ' text-[17px]' : ' text-[21px]'}`}
+        className={`pr-[5px] ${isRunning ? ' text-[17px]' : ' text-[17px]'}`}
       >
         {' '}
         {isRunning ? `${title} 까지` : title}
       </span>
       {isRunning && (
-        <>
+        <div className="text-red-500">
           <span className={days === '00' ? `hidden` : ``}>{days}일 </span>
           <span>
             {hours}:{minutes}:{seconds}
           </span>
-        </>
+        </div>
       )}
-    </p>
+    </div>
   )
 }

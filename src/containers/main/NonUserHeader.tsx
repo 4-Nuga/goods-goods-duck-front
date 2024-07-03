@@ -24,8 +24,8 @@ export default function NonUserHeader({
       <Image
         src={`https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/basicImage.png`}
         alt="profile"
-        width={50}
-        height={50}
+        width={45}
+        height={45}
         className="rounded-full aspect-square"
       />
       <div className="pl-[20px] content-center items-center">

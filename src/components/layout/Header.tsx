@@ -18,16 +18,16 @@ export default function Header() {
   if (pathname.startsWith(`/goods/`) || pathname === '/') return null
 
   return (
-    <header className="static mt-5 flex justify-between leading-[50px]">
+    <header className="static mt-4 flex justify-between leading-[50px]">
       <button
         type="button"
         aria-label="logo-button"
         className="flex justify-center items-cente pl-5"
         onClick={() => setVisible(true)}
       >
-        <h1 className="flex hover:bg-gray-200">
+        <div className="flex hover:bg-gray-200">
           <Logo />
-        </h1>
+        </div>
         <div className="flex flex-col items-center w-10 h-full justify-center gap-1 pl-1 pr-1 hover:bg-gray-200">
           <SlArrowRight className="text-xl text-gray-500" />
           <div className="leading-3 text-[10px] text-gray-400">more</div>
