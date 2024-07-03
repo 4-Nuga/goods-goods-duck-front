@@ -133,6 +133,15 @@ export default function EasyForm() {
           </button>
         </div>
       </span>
+      <p className="text-slate-500 text-sm mt-5">
+        * 최초 소셜 회원가입 시에만 받는 정보에요.
+      </p>
+      <p className="text-slate-500 text-sm">
+        * 앞으로는 소셜 아이콘 클릭만으로 간편 로그인 할 수 있어요.
+      </p>
+      <p className="text-slate-500 text-sm">
+        * 기존 회원이라면 2가지 로그인 방법을 모두 사용할 수 있습니다.
+      </p>
     </div>
   )
 }

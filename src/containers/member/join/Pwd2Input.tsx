@@ -39,14 +39,11 @@ export default function Pwd2Inptut() {
   }, [currentFocus])
 
   return (
-    <div className="w-full h-14 rounded-3xl my-7">
+    <div className="w-full h-14 rounded-3xl my-12">
+      <label htmlFor="비밀번호 재입력" className="text-sm">
+        <span className="text-xs text-red-500">*</span> 비밀번호 재확인
+      </label>
       <span className="flex relative w-full h-full">
-        <label
-          htmlFor="비밀번호 재확인"
-          className="overflow-hidden absolute w-px h-px text-[0px]"
-        >
-          비밀번호 재확인
-        </label>
         <input
           id="비밀번호 재확인"
           ref={pwd2InputRef}

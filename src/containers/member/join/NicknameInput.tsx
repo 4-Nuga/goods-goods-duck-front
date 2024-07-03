@@ -59,21 +59,16 @@ export default function NicknameInput() {
   }, [currentFocus])
 
   return (
-    <div
-      className={`{w-full h-14 rounded-3xl ${isValidNick ? 'mt-7 mb-11' : 'my-7'}`}
-    >
+    <div className="w-full h-14 rounded-3xl mt-10 mb-20">
+      <label htmlFor="닉네임" className="text-sm">
+        <span className="text-xs text-red-500">*</span> 닉네임
+      </label>
       <span className="flex relative w-full h-full">
-        <label
-          htmlFor="닉네임"
-          className="overflow-hidden absolute w-px h-px text-[0px]"
-        >
-          닉네임
-        </label>
         <input
           id="닉네임"
           ref={nicknameInputRef}
           type="text"
-          placeholder="닉네임: 2~15자"
+          placeholder="특수기호를 제외한 2~15자"
           autoComplete="off"
           minLength={2}
           maxLength={15}

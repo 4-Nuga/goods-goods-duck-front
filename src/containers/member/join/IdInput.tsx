@@ -54,19 +54,16 @@ export default function IdInput() {
   }, [currentFocus])
 
   return (
-    <div className="w-full h-14 rounded-3xl my-7">
+    <div className="w-full h-14 rounded-3xl mt-10 mb-14">
+      <label htmlFor="아이디" className="text-sm">
+        <span className="text-xs text-red-500">*</span> 아이디
+      </label>
       <span className="flex relative w-full h-full">
-        <label
-          htmlFor="아이디"
-          className="overflow-hidden absolute w-px h-px text-[0px]"
-        >
-          아이디
-        </label>
         <input
           id="아이디"
           ref={idInputRef}
           type="text"
-          placeholder="아이디: 영문과 숫자를 조합한 6~15자"
+          placeholder="영문과 숫자를 조합한 6~15자"
           autoComplete="off"
           minLength={6}
           maxLength={15}
