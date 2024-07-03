@@ -1,5 +1,6 @@
 'use client'
 
+import { usePathname } from 'next/navigation'
 import { FiSearch } from 'react-icons/fi'
 import { useHeaderModalState } from '@/components/layout/store'
 import SearchModal from '@/containers/main/search/SearchModal'
@@ -7,6 +8,10 @@ import SearchModal from '@/containers/main/search/SearchModal'
 export default function SubHeader({ pageTitle }: { pageTitle: string }) {
   // const [visible, setVisible] = useState<boolean>(false)
   const { search, setSearch } = useHeaderModalState()
+  const pathname = usePathname()
+
+  if (pathname.startsWith('/goods/')) return null
+
   return (
     <header className="flex justify-between items-center py-4 px-4 bg-white shadow-md">
       <button

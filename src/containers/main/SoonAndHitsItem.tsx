@@ -42,10 +42,10 @@ export default function SoonAndHitsItem({
           )}
           {sort === 'soon' && (
             <>
-              <p className="absolute top-3 left-3 bg-[#F9B23C] rounded-full text-white px-[5px] py-[2px] text-[12px] leading-[16px]">
+              <p className="absolute z-[5] top-3 left-3 bg-[#F9B23C] rounded-full text-white px-[5px] py-[2px] text-[12px] leading-[16px]">
                 New
               </p>
-              <p className="absolute top-3 left-12 bg-black bg-opacity-25 text-white px-[5px] py-[2px] rounded-full text-[12px] leading-[16px]">
+              <p className="absolute z-[5] top-3 left-12 bg-black bg-opacity-25 text-white px-[5px] py-[2px] rounded-full text-[12px] leading-[16px]">
                 coming soon
               </p>
             </>
