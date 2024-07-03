@@ -9,7 +9,7 @@ export default function InfoArea() {
   const { data: session } = useSession()
 
   return (
-    <div className="mx-7 my-3 rounded-3xl bg-slate-100 px-2 py-2">
+    <div className="mx-7 my-3 rounded-3xl bg-slate-100 mt-4 px-2 py-2">
       <span className="text-xs pl-4 border-b-2">나의 정보</span>
       <div className="flex mt-4 ml-3">
         {session?.user.image ? (

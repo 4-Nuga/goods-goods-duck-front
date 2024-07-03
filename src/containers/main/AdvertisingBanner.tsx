@@ -16,32 +16,32 @@ export default function AdvertisingBanner() {
   const pathname = usePathname()
   SwiperCore.use([Navigation, Autoplay])
 
-  const rootUrl = 'http://localhost:3000'
+  const rootUrl = 'https://goodsgoodsduck.shop'
 
   const bannerBaseball = [
     {
       id: 1,
-      image: `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/banner-baseball1.png`,
+      image: `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/banner-baseball1.webp`,
       url: `${rootUrl}/mypage/notice`,
     },
     {
       id: 2,
-      image: `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/banner-baseball2.png`,
+      image: `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/banner-baseball2.webp`,
       url: `${rootUrl}/mypage/notice`,
     },
     {
       id: 3,
-      image: `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/banner-nextCategory.png`,
+      image: `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/banner-nextCategory.webp`,
       url: `${rootUrl}/mypage/notice`,
     },
     {
       id: 4,
-      image: `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/banner-notice2.png`,
+      image: `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/banner-notice2.webp`,
       url: `${rootUrl}/mypage/notice`,
     },
     {
       id: 5,
-      image: `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/banner-baseball3.png`,
+      image: `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/banner-baseball3.webp`,
       url: `${rootUrl}/mypage/notice`,
     },
   ]
@@ -49,22 +49,27 @@ export default function AdvertisingBanner() {
   const bannerIdol = [
     {
       id: 1,
-      image: `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/banner-idol1.jpg`,
+      image: `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/banner-idol3.webp`,
       url: `${rootUrl}/mypage/notice`,
     },
     {
       id: 2,
-      image: `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/banner-idol2.png`,
+      image: `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/banner-idol2.webp`,
       url: `${rootUrl}/mypage/notice`,
     },
     {
       id: 3,
-      image: `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/banner-nextCategory.png`,
+      image: `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/banner-nextCategory.webp`,
       url: `${rootUrl}/mypage/notice`,
     },
     {
       id: 4,
-      image: `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/banner-notice2.png`,
+      image: `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/banner-notice2.webp`,
+      url: `${rootUrl}/mypage/notice`,
+    },
+    {
+      id: 5,
+      image: `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/banner-idol1.webp`,
       url: `${rootUrl}/mypage/notice`,
     },
   ]
@@ -72,17 +77,22 @@ export default function AdvertisingBanner() {
   const bannerAnimation = [
     {
       id: 1,
-      image: `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/banner-animation1.png`,
+      image: `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/banner-animation1.webp`,
       url: `${rootUrl}/mypage/notice`,
     },
     {
       id: 2,
-      image: `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/banner-nextCategory.png`,
+      image: `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/banner-nextCategory.webp`,
       url: `${rootUrl}/mypage/notice`,
     },
     {
       id: 3,
-      image: `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/banner-notice2.png`,
+      image: `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/banner-notice2.webp`,
+      url: `${rootUrl}/mypage/notice`,
+    },
+    {
+      id: 4,
+      image: `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/banner-animation2.webp`,
       url: `${rootUrl}/mypage/notice`,
     },
   ]
@@ -122,13 +132,15 @@ export default function AdvertisingBanner() {
           <>
             {bannerBaseball.map((item: BannerType) => (
               <SwiperSlide key={item.id}>
-                <Image
-                  src={item.image}
-                  alt="배너 이미지"
-                  width={600}
-                  height={600}
-                  className="rounded-3xl m-auto aspect-square object-cover"
-                />
+                <Link href={item.url}>
+                  <Image
+                    src={item.image}
+                    alt="배너 이미지"
+                    width={600}
+                    height={600}
+                    className="rounded-3xl m-auto aspect-square object-cover"
+                  />
+                </Link>
               </SwiperSlide>
             ))}
           </>
@@ -137,13 +149,15 @@ export default function AdvertisingBanner() {
           <>
             {bannerIdol.map((item: BannerType) => (
               <SwiperSlide key={item.id}>
-                <Image
-                  src={item.image}
-                  alt="배너 이미지"
-                  width={600}
-                  height={600}
-                  className="rounded-3xl m-auto aspect-square object-cover"
-                />
+                <Link href={item.url}>
+                  <Image
+                    src={item.image}
+                    alt="배너 이미지"
+                    width={600}
+                    height={600}
+                    className="rounded-3xl m-auto aspect-square object-cover"
+                  />
+                </Link>
               </SwiperSlide>
             ))}
           </>

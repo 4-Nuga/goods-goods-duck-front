@@ -31,7 +31,7 @@ export default function SoonAndHitsItem({
           {!item.thumbnail && (
             <div className="bg-[#F9B23C] rounded-t-2xl">
               <Image
-                src={`https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/basicImage.png`}
+                src={`https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/basicImage.webp`}
                 alt={item.goodsCode}
                 width={0}
                 height={0}
@@ -42,10 +42,10 @@ export default function SoonAndHitsItem({
           )}
           {sort === 'soon' && (
             <>
-              <p className="absolute top-3 left-3 bg-[#F9B23C] rounded-full text-white px-[5px] py-[2px] text-[12px] leading-[16px]">
+              <p className="absolute z-[5] top-3 left-3 bg-[#F9B23C] rounded-full text-white px-[5px] py-[2px] text-[12px] leading-[16px]">
                 New
               </p>
-              <p className="absolute top-3 left-12 bg-black bg-opacity-25 text-white px-[5px] py-[2px] rounded-full text-[12px] leading-[16px]">
+              <p className="absolute z-[5] top-3 left-12 bg-black bg-opacity-25 text-white px-[5px] py-[2px] rounded-full text-[12px] leading-[16px]">
                 coming soon
               </p>
             </>

@@ -1,6 +1,7 @@
-import Header from '@/components/layout/Header'
+// import Header from '@/components/layout/Header'
 import Nav from '@/components/layout/Nav'
 import RegistrationBtn from '@/components/layout/RegistrationBtn'
+import SubHeader from '@/components/layout/SubHeader'
 import UpNav from '@/components/layout/UpNav'
 
 export default function GoodsLayout({
@@ -8,9 +9,10 @@ export default function GoodsLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const pageTitle = '전체'
   return (
     <>
-      <Header />
+      <SubHeader pageTitle={pageTitle} />
       {children}
       <Nav />
       <aside>

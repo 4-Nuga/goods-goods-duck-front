@@ -22,7 +22,7 @@ export default function NonUserHeader({
   return (
     <Link href="/login" className="flex">
       <Image
-        src={`https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/basicImage.png`}
+        src={`https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/basicImage.webp`}
         alt="profile"
         width={45}
         height={45}
