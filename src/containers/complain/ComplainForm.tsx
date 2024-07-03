@@ -1,27 +1,32 @@
 'use client'
 
-import { useRouter, usePathname } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { useEffect } from 'react'
 import { useBasicAlertStore } from '@/components/Modal/store'
+import { useToastStore } from '@/components/Toast/store'
 import {
   registerComplainGoods,
   registerComplainUsers,
 } from '@/utils/etcApiActions'
 import CheckList from './CheckList'
+import ComplainHeader from './ComplainHeader'
 import ReasonArea from './ReasonArea'
 import { useComplainStore } from './store'
 
 export default function ComplainForm({
-  params,
+  setVisible,
+  goodsCode,
+  seller,
 }: {
-  params: { [key: string]: string | undefined }
+  setVisible: React.Dispatch<React.SetStateAction<boolean>>
+  goodsCode: string
+  seller: string
 }) {
   const { complainReason, complainContent, resetComplainState } =
     useComplainStore()
-  const router = useRouter()
   const pathname = usePathname()
+  const { showToast } = useToastStore()
   const { isClosed, showAlert, setIsClosed } = useBasicAlertStore()
-  const { goodsCode, seller } = params
   const userComplainList = [
     {
       id: 0,
@@ -79,8 +84,11 @@ export default function ComplainForm({
   async function registrationComplain(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
 
+    if (complainReason === '') return showToast('이유를 선택해주세요.')
+    if (complainContent === '') return showToast('상세 사유를 작성해주세요.')
+
     const data =
-      pathname === '/user-complain'
+      pathname === '/seller'
         ? await registerComplainUsers(seller!, complainReason, complainContent)
         : await registerComplainGoods(
             goodsCode!,
@@ -90,24 +98,30 @@ export default function ComplainForm({
 
     if (data.status === 200) {
       resetComplainState()
-      showAlert('신고가 완료되었습니다.')
-    } else {
-      showAlert('신고 등록에 실패했습니다.')
+      setVisible(false)
+      return showAlert('신고가 완료되었습니다.')
     }
+    showToast(data.message)
+    return showAlert('신고 등록에 실패했습니다.')
   }
 
   useEffect(() => {
     if (isClosed) {
+      setVisible(false)
       setIsClosed(false)
-      router.push(`/goods/${goodsCode}`)
+      // router.push(`/goods/${goodsCode}`)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isClosed])
 
   return (
-    <div>
-      <form onSubmit={registrationComplain} className="px-[20px]">
-        {pathname === '/user-complain' ? (
+    <div className="bg-black z-20 fixed top-0 left-0 bg-opacity-25 w-screen h-screen">
+      <form
+        onSubmit={registrationComplain}
+        className="bg-white z-30 fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 h-auto w-[90%] rounded-3xl px-[20px] py-[20px]"
+      >
+        <ComplainHeader setVisible={setVisible} />
+        {pathname === '/seller' ? (
           <CheckList complainList={userComplainList} />
         ) : (
           <CheckList complainList={goodsComplainList} />
@@ -115,7 +129,7 @@ export default function ComplainForm({
         <ReasonArea />
         <button
           type="submit"
-          className="w-full mt-[20px] px-[15px] py-[13px] mb-[40px] bg-sky-600 rounded-full text-white text-[18px]"
+          className="w-full mt-[15px] px-[15px] py-[13px] mb-[30px] bg-sky-600 rounded-full text-white text-[18px]"
         >
           신고하기
         </button>
