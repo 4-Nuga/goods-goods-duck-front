@@ -1,5 +1,4 @@
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useEffect } from 'react'
 import NicknameInput from '@/containers/member/join/NicknameInput'
 import PhoneVerification from '@/containers/member/join/PhoneVerification'
 import ProfileImgArea from '@/containers/member/join/ProfileImgArea'
@@ -23,15 +22,10 @@ export default function EasyForm() {
     profileImage,
     favoriteCategory,
     nickname,
-    userId,
-    password,
     phoneNumber,
 
     isValidNick,
     isVerified,
-
-    setUserId,
-    setPassword,
     resetJoinState,
   } = useJoinStore()
   const {
@@ -92,8 +86,8 @@ export default function EasyForm() {
       profileImageUrl,
       favoriteCategory,
       nickname,
-      userId,
-      password,
+      id!,
+      provider!,
       phoneNumber,
     )
 
@@ -104,12 +98,6 @@ export default function EasyForm() {
     resetJoinState()
     resetErrorState()
   }
-
-  useEffect(() => {
-    setUserId(id!)
-    setPassword(provider!)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
 
   return (
     <div className="w-full flex-shrink-0">
