@@ -25,7 +25,7 @@ export default function LiveAndHotItem({ item }: { item: LiveAndHotType }) {
           {!item.thumbnail && (
             <div className="h-[200px] bg-[#F9B23C] rounded-t-lg items-center pb-[17px]">
               <Image
-                src={`https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/basicImage.png`}
+                src={`https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/basicImage.webp`}
                 alt={item.goodsName}
                 width={0}
                 height={0}

@@ -31,7 +31,7 @@ export default function GoodsItem({
           {!goodsItemData.thumbnail && (
             <div className="rounded-t-2xl max-h-[300px] w-full h-auto bg-[#F9B23C] flex items-center justify-center">
               <Image
-                src={`https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/basicImage.png`}
+                src={`https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/basicImage.webp`}
                 width={0}
                 height={0}
                 sizes="100vw"

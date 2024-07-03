@@ -31,7 +31,7 @@ export default function SoonAndHitsItem({
           {!item.thumbnail && (
             <div className="bg-[#F9B23C] rounded-t-2xl">
               <Image
-                src={`https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/basicImage.png`}
+                src={`https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/basicImage.webp`}
                 alt={item.goodsCode}
                 width={0}
                 height={0}

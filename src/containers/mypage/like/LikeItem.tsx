@@ -24,7 +24,7 @@ export default function LikeItem({ goodsCode }: { goodsCode: string }) {
   const { showToast } = useToastStore()
   const ImageUrl = data.thumbnail
     ? data.thumbnail.url
-    : `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/basicImage.png`
+    : `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/basicImage.webp`
 
   const handleLike = async () => {
     if (isLiked) {
