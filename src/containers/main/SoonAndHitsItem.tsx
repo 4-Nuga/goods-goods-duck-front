@@ -16,6 +16,16 @@ export default function SoonAndHitsItem({
   return (
     <div className="border rounded-2xl">
       <div className="relative">
+        {sort === 'soon' && (
+          <>
+            <p className="absolute z-[5] top-3 left-3 bg-[#F9B23C] rounded-full text-white px-[5px] py-[2px] text-[12px] leading-[16px]">
+              New
+            </p>
+            <p className="absolute z-[5] top-3 left-12 bg-black bg-opacity-25 text-white px-[5px] py-[2px] rounded-full text-[12px] leading-[16px]">
+              coming soon
+            </p>
+          </>
+        )}
         <LikeBtn goodsCode={item.goodsCode} />
         <Link href={`/goods/${item.goodsCode}`} className="relative">
           {item.thumbnail && (
@@ -39,16 +49,6 @@ export default function SoonAndHitsItem({
                 className="rounded-t-2xl max-h-[200px] w-full h-auto object-scale-down aspect-square"
               />
             </div>
-          )}
-          {sort === 'soon' && (
-            <>
-              <p className="absolute z-[5] top-3 left-3 bg-[#F9B23C] rounded-full text-white px-[5px] py-[2px] text-[12px] leading-[16px]">
-                New
-              </p>
-              <p className="absolute z-[5] top-3 left-12 bg-black bg-opacity-25 text-white px-[5px] py-[2px] rounded-full text-[12px] leading-[16px]">
-                coming soon
-              </p>
-            </>
           )}
         </Link>
       </div>
