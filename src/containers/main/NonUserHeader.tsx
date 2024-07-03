@@ -28,8 +28,10 @@ export default function NonUserHeader({
         height={45}
         className="rounded-full aspect-square"
       />
-      <div className="pl-[20px] content-center items-center">
-        <p className="text-[18px]">로그인 하러 가기!</p>
+      <div className="pl-[20px] content-center">
+        <p className="flex justify-center items-center text-[18px]">
+          로그인 하러 가기!
+        </p>
       </div>
     </Link>
   )

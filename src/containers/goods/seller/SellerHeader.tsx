@@ -1,9 +1,9 @@
 'use client'
 
-import Link from 'next/link'
 import { useState } from 'react'
 import { RxDotsVertical } from 'react-icons/rx'
 import BackBtn from '@/components/Btn/BackBtn'
+import ComplainForm from '@/containers/complain/ComplainForm'
 
 export default function SellerHeader({
   goodsCode,
@@ -13,6 +13,7 @@ export default function SellerHeader({
   seller: string
 }) {
   const [toggle, setToggle] = useState<boolean>(false)
+  const [visible, setVisible] = useState<boolean>(false)
 
   return (
     <div className="relative flex h-[50px]">
@@ -29,12 +30,20 @@ export default function SellerHeader({
         <RxDotsVertical className="w-[25px] h-[25px]" />
       </button>
       {toggle && (
-        <Link
-          href={`/user-complain?seller=${seller}&goodsCode=${goodsCode}`}
-          className="absolute top-[50px] right-2 bg-white w-[120px] rounded-lg text-[17px] py-[5px] px-[8px] z-10 shadow-[0px_3px_10px_5px_rgba(0,0,0,0.05)]"
+        <button
+          type="button"
+          className="absolute top-[50px] right-2 text-left bg-white w-[120px] rounded-lg text-[17px] py-[5px] px-[8px] z-10 shadow-[0px_3px_10px_5px_rgba(0,0,0,0.05)]"
+          onClick={() => setVisible(true)}
         >
           신고하기
-        </Link>
+        </button>
+      )}
+      {visible && (
+        <ComplainForm
+          setVisible={setVisible}
+          goodsCode={goodsCode}
+          seller={seller}
+        />
       )}
     </div>
   )
