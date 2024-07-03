@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import { useRef, useState } from 'react'
 import { MdCancel } from 'react-icons/md'
-import { useBasicAlertStore } from '@/components/Modal/store'
 import { useJoinStore } from '@/containers/member/join/store'
 import ProfileImgBtn from '@/public/svgs/icon/profileImgBtn.svg'
 
@@ -9,7 +8,6 @@ export default function ProfileImgArea() {
   const imageInputRef = useRef<HTMLInputElement>(null)
   const [previewUrl, setPreviewUrl] = useState<string>('')
   const { setProfileImage } = useJoinStore()
-  const { showAlert } = useBasicAlertStore()
 
   const handleButtonClick = () => {
     imageInputRef.current?.click()
@@ -32,7 +30,8 @@ export default function ProfileImgArea() {
         reader.readAsDataURL(selectedFile)
         setProfileImage(selectedFile)
       } else {
-        showAlert('유효하지 않은 파일 형식입니다.')
+        setPreviewUrl('')
+        setProfileImage(null)
       }
     }
   }
