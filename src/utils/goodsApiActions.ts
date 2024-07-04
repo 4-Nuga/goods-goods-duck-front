@@ -26,7 +26,7 @@ export const postGoods = async (
   wishTradeType: string,
   tags: TagItem[],
   images: ImageItem[],
-): Promise<ApiResponse<null>> => {
+): Promise<ApiResponse<string | null>> => {
   const session = await getServerSession(options)
 
   const inputData = {
@@ -40,17 +40,27 @@ export const postGoods = async (
     tags,
     images,
   }
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API}/v1/goods`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: session?.user.accessToken,
-    },
-    body: JSON.stringify(inputData),
-  })
 
-  const data = await res.json()
-  return data
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API}/v1/goods`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: session?.user.accessToken,
+      },
+      body: JSON.stringify(inputData),
+    })
+
+    const data = await res.json()
+    return data
+  } catch {
+    const data = {
+      status: 500,
+      result: null,
+      message: '유효한 요청 메소드가 아닙니다.',
+    }
+    return data
+  }
 }
 
 /**
