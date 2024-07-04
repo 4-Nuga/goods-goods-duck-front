@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { ReviewType } from '@/types/etcApiDataType'
 import { SummaryDataType } from '@/types/readApiDataType'
 import { getGoodsSummary } from '@/utils/readsApiActions'
+import { motion } from 'framer-motion'
 import ReviewModal from './ReviewModal'
 
 export default function ReviewItem({
@@ -41,25 +42,33 @@ export default function ReviewItem({
   }, [])
 
   return (
-    <div className="relative mx-5 my-5 px-[20px] py-[20px] bg-slate-100 rounded-xl">
-      <button type="button" className="flex" onClick={() => setVisible(true)}>
-        <Image
-          src={ImageUrl}
-          alt="굿즈 이미지"
-          width={70}
-          height={70}
-          className="rounded-full aspect-auto"
-        />
-        <div className="pl-[20px] w-[70%] place-self-center overflow-hidden">
-          <p className="flex text-left font-semibold">{data.goodsName}</p>
-          <p className="pt-[10px] text-left whitespace-nowrap truncate overflow-hidden">
-            {review.content}
-          </p>
-        </div>
-      </button>
-      {visible && (
-        <ReviewModal review={review} goods={data} setVisible={setVisible} />
-      )}
-    </div>
+    <motion.div
+      initial={{ x: 100, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className="relative mx-5 my-5 px-[20px] py-[20px] bg-slate-100 rounded-xl">
+        <button
+          type="button"
+          className="flex items-center"
+          onClick={() => setVisible(true)}
+        >
+          <Image
+            src={ImageUrl}
+            alt="굿즈 이미지"
+            width={70}
+            height={70}
+            className="rounded-full aspect-auto"
+          />
+          <div className="pl-[20px] w-[70%] place-self-center overflow-hidden">
+            <p className="flex text-left font-semibold">{data.goodsName}</p>
+            <p className="pt-[10px] text-left">{review.content}</p>
+          </div>
+        </button>
+        {visible && (
+          <ReviewModal review={review} goods={data} setVisible={setVisible} />
+        )}
+      </div>
+    </motion.div>
   )
 }

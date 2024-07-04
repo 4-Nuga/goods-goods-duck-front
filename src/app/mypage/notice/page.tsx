@@ -3,6 +3,9 @@ import NoticeList from '@/containers/mypage/NoticeList'
 export default async function Notice() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API}/v1/etc-n/notice?page=0&size=20&sort=`,
+    {
+      cache: 'no-cache',
+    },
   )
   const data = await res.json()
   return (

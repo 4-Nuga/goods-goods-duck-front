@@ -22,7 +22,7 @@ export default function NoticeList({ data }: { data: NoticeType }) {
   const result = data.noticeList
 
   return (
-    <div className="p-4">
+    <div className="p-4 mb-4">
       <table className="w-full table-auto border-collapse">
         <thead>
           <tr className="bg-gray-200">

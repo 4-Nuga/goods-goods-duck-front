@@ -9,7 +9,7 @@ import { motion } from 'framer-motion'
 export default function MannerDuckArea({
   mannerDuckData,
 }: {
-  mannerDuckData: ApiResponse<MannerDuckData>
+  mannerDuckData: ApiResponse<MannerDuckData | null>
 }) {
   const { data: session } = useSession()
   const mannerDuck = mannerDuckData.result

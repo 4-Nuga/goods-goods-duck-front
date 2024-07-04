@@ -76,6 +76,7 @@ export default function GoodsForm() {
     const images = await uploadGoodsImage(imageItems)
 
     const openedAt = `${biddingPeriod}T${biddingTime}:00.000Z`
+
     const date = new Date(`${biddingPeriod} ${biddingTime}`)
 
     const offset = date.getTimezoneOffset() * 60000
@@ -103,11 +104,7 @@ export default function GoodsForm() {
       redirect(`/${currentPage}`)
     }
 
-    resetGoodsState()
-    resetImagesState()
-    resetTagsState()
     showToast(data.message)
-    redirect(`/${currentPage}`)
   }
 
   function handleKeyDown(event: React.KeyboardEvent) {

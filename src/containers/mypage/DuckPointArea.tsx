@@ -9,7 +9,7 @@ import { motion } from 'framer-motion'
 export default function DuckPointArea({
   duckPointData,
 }: {
-  duckPointData: ApiResponse<number>
+  duckPointData: ApiResponse<number | null>
 }) {
   const duckPoint = duckPointData.result
 

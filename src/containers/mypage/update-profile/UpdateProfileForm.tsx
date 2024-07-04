@@ -50,9 +50,9 @@ export default function UpdateProfileForm() {
 
     await update({
       ...session?.user,
-      image: data.result.profileImage,
-      nickname: data.result.nickname,
-      favoriteCategory: data.result.favCategory,
+      image: data.result?.profileImage,
+      nickname: data.result?.nickname,
+      favoriteCategory: data.result?.favCategory,
     })
 
     resetProfile()
