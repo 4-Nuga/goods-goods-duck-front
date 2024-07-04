@@ -83,7 +83,7 @@ export default function AdvertisingBanner() {
     {
       id: 3,
       image: `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/banner-notice2.webp`,
-      url: `${rootUrl}/mypage/notice/5`,
+      url: `${rootUrl}/mypage/notice/4`,
     },
     {
       id: 4,
