@@ -18,15 +18,26 @@ import {
     "favCategory": "선호카테고리"
     },
  */
-export const getProfile = async (): Promise<ApiResponse<ProfileData>> => {
+export const getProfile = async (): Promise<
+  ApiResponse<ProfileData | null>
+> => {
   const session = await getServerSession(options)
 
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API}/v1/users-n/${session?.user.uuid}`,
-  )
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API}/v1/users-n/${session?.user.uuid}`,
+    )
 
-  const data: ApiResponse<ProfileData> = await res.json()
-  return data
+    const data: ApiResponse<ProfileData> = await res.json()
+    return data
+  } catch {
+    const data = {
+      status: 500,
+      result: null,
+      message: '유효한 요청 메소드가 아닙니다.',
+    }
+    return data
+  }
 }
 
 /**
@@ -37,33 +48,53 @@ export const getProfile = async (): Promise<ApiResponse<ProfileData>> => {
     "leftPoint": 12 (다음 매너덕까지 남은 점수)
   },
  */
-export const getMannerDuck = async (): Promise<ApiResponse<MannerDuckData>> => {
+export const getMannerDuck = async (): Promise<
+  ApiResponse<MannerDuckData | null>
+> => {
   const session = await getServerSession(options)
 
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API}/v1/users-n/${session?.user.uuid}/manner-duck`,
-  )
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API}/v1/users-n/${session?.user.uuid}/manner-duck`,
+    )
 
-  const data: ApiResponse<MannerDuckData> = await res.json()
-  return data
+    const data: ApiResponse<MannerDuckData> = await res.json()
+    return data
+  } catch {
+    const data = {
+      status: 500,
+      result: null,
+      message: '유효한 요청 메소드가 아닙니다.',
+    }
+    return data
+  }
 }
 
 /**
  * 덕페이 충전 금액 조회
  * @returns 현재 보유 포인트
  */
-export const getDuckPoint = async (): Promise<ApiResponse<number>> => {
+export const getDuckPoint = async (): Promise<ApiResponse<number | null>> => {
   const session = await getServerSession(options)
 
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API}/v1/users/duck-point`,
-    {
-      headers: { Authorization: session?.user.accessToken },
-    },
-  )
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API}/v1/users/duck-point`,
+      {
+        headers: { Authorization: session?.user.accessToken },
+      },
+    )
 
-  const data: ApiResponse<number> = await res.json()
-  return data
+    const data: ApiResponse<number> = await res.json()
+    return data
+  } catch {
+    const data = {
+      status: 500,
+      result: null,
+      message: '유효한 요청 메소드가 아닙니다.',
+    }
+    return data
+  }
 }
 
 // Todo: 토큰이 있는 경우에도 비밀번호 재설정 가능
@@ -114,44 +145,59 @@ export const updateUserProfile = async (
   profileImage: string,
   nickname: string,
   favoriteCategory: string,
-): Promise<ApiResponse<ProfileData>> => {
+): Promise<ApiResponse<ProfileData | null>> => {
   const session = await getServerSession(options)
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API}/v1/users`, {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: session?.user.accessToken,
-    },
-    body: JSON.stringify({
-      profileImage,
-      nickname,
-      favoriteCategory,
-    }),
-  })
-
-  const data: ApiResponse<ProfileData> = await res.json()
-  return data
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API}/v1/users`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: session?.user.accessToken,
+      },
+      body: JSON.stringify({
+        profileImage,
+        nickname,
+        favoriteCategory,
+      }),
+    })
+    const data: ApiResponse<ProfileData> = await res.json()
+    return data
+  } catch {
+    const data = {
+      status: 500,
+      result: null,
+      message: '유효한 요청 메소드가 아닙니다.',
+    }
+    return data
+  }
 }
 
 export const chargeDuckPoint = async (totalAmount: number) => {
   const session = await getServerSession(options)
-
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API}/v1/users-n/pay/ready`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API}/v1/users-n/pay/ready`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          itemName: '충전',
+          totalAmount,
+          uuid: session?.user.uuid,
+        }),
       },
-      body: JSON.stringify({
-        itemName: '충전',
-        totalAmount,
-        uuid: session?.user.uuid,
-      }),
-    },
-  )
-
-  const data = await res.json()
-  return data
+    )
+    const data = await res.json()
+    return data
+  } catch {
+    const data = {
+      status: 500,
+      result: null,
+      message: '유효한 요청 메소드가 아닙니다.',
+    }
+    return data
+  }
 }
