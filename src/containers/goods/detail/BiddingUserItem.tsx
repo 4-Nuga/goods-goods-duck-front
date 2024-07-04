@@ -28,7 +28,7 @@ export default function BiddingUserItem({
     <div className="flex mt-[20px]">
       {bidder.profileImage === '' && (
         <Image
-          src={`https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/basicImage.png`}
+          src={`https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/basicImage.webp`}
           alt="profile"
           width={50}
           height={50}

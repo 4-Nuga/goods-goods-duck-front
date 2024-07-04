@@ -28,7 +28,9 @@ export default function DetailInfo({
     <div className="mt-[35px] px-[20px]">
       <div className="relative flex justify-between mt-[15px] items-center">
         <p className="text-[20px]">{goodsDetail.name}</p>
-        <LikeBtn goodsCode={goodsDetail.goodsCode} />
+        <div className="flex justify-center items-center w-[40px]">
+          <LikeBtn goodsCode={goodsDetail.goodsCode} />
+        </div>
       </div>
       <div className="flex justify-between mt-1 items-end">
         <div className="flex flex-col mb-2">

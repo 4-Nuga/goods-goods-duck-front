@@ -14,7 +14,7 @@ export default function ReviewModal({
 }) {
   const ImageUrl = goods.thumbnail
     ? goods.thumbnail.url
-    : '/images/basicImage.png'
+    : `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/basicImage.webp`
 
   return (
     <div className="bg-black z-20 fixed top-0 left-0 bg-opacity-25 w-screen h-screen">

@@ -86,12 +86,12 @@ export const options: NextAuthOptions = {
           return false
         }
 
-        user.uuid = loginRes.uuid
-        user.accessToken = loginRes.accessToken
-        user.refreshToken = loginRes.refreshToken
-        user.profileImage = userRes.profileImage
-        user.nickname = userRes.nickname
-        user.favCategory = userRes.favCategory
+        user.uuid = loginRes.result.uuid
+        user.accessToken = loginRes.result.accessToken
+        user.refreshToken = loginRes.result.refreshToken
+        user.profileImage = userRes.result.profileImage
+        user.nickname = userRes.result.nickname
+        user.favCategory = userRes.result.favCategory
         return true
       }
 

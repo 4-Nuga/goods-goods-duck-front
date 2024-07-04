@@ -2,6 +2,7 @@
 
 import { getServerSession } from 'next-auth'
 import { options } from '@/app/api/auth/[...nextauth]/options'
+import Header from '@/components/layout/Header'
 import AdvertisingBanner from '@/containers/main/AdvertisingBanner'
 import ComingSoon from '@/containers/main/ComingSoon'
 import Hits from '@/containers/main/Hits'
@@ -43,6 +44,7 @@ export default async function BaseballHome() {
     getDuckPointData.status === 200 ? getDuckPointData.result : -1
   return (
     <main className="w-full">
+      <Header />
       <div className="flex justify-between pt-2 pl-6 pr-6">
         {/* <Intro /> */}
         {session && duckPointData !== -1 ? (

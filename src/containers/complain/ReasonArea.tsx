@@ -9,11 +9,11 @@ export default function ReasonArea() {
 
   return (
     <div className="mt-[35px]">
-      <p className="text-[19px] pl-[10px]">이유를 상세하게 작성해 주세요.</p>
+      <p className="text-[17px] pl-[10px]">이유를 상세하게 작성해 주세요.</p>
       <textarea
         id="content"
         name="content"
-        className="w-full h-[300px] mt-[10px] px-[15px] py-[13px] rounded-3xl focus:outline-none border
+        className="w-full h-[200px] mt-[10px] px-[15px] py-[13px] rounded-3xl focus:outline-none border
           placeholder:text-[#bcbcbc] placeholder:text-[15px] placeholder:whitespace-pre-line"
         maxLength={500}
         onChange={(e) => {

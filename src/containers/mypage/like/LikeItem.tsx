@@ -6,6 +6,7 @@ import { useToastStore } from '@/components/Toast/store'
 import { SummaryDataType } from '@/types/readApiDataType'
 import { addLike, deleteLike } from '@/utils/mainApiActions'
 import { getGoodsSummary } from '@/utils/readsApiActions'
+import { motion } from 'framer-motion'
 
 export default function LikeItem({ goodsCode }: { goodsCode: string }) {
   const [data, setData] = useState<SummaryDataType>({
@@ -24,7 +25,7 @@ export default function LikeItem({ goodsCode }: { goodsCode: string }) {
   const { showToast } = useToastStore()
   const ImageUrl = data.thumbnail
     ? data.thumbnail.url
-    : `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/basicImage.png`
+    : `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/basicImage.webp`
 
   const handleLike = async () => {
     if (isLiked) {
@@ -57,49 +58,55 @@ export default function LikeItem({ goodsCode }: { goodsCode: string }) {
   }, [])
 
   return (
-    <div className="relative border rounded-2xl">
-      <button
-        type="button"
-        onClick={handleLike}
-        className="absolute bottom-2 right-2 z-10"
-      >
-        {isLiked ? (
-          <LiaHeartSolid className="w-[30px] h-[32px] ml-[13px] text-red-500" />
-        ) : (
-          <LiaHeart className="w-[30px] h-[32px] ml-[13px] text-stone-400" />
-        )}
-      </button>
-      <Link href={`/goods/${goodsCode}`}>
-        <p
-          className={`absolute z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-base text-center text-white leading-4 whitespace-pre-line ${data.tradingStatus === 0 || data.tradingStatus === 1 ? 'hidden' : ''}`}
+    <motion.div
+      initial={{ x: 100, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className="relative border rounded-2xl">
+        <button
+          type="button"
+          onClick={handleLike}
+          className="absolute bottom-2 right-2 z-10"
         >
-          경매가 종료된 상품입니다.
-        </p>
-        <Image
-          src={ImageUrl}
-          width={0}
-          height={0}
-          sizes="100vw"
-          className={`rounded-t-2xl max-h-[300px] w-full h-auto object-cover aspect-square ${data.tradingStatus === 0 || data.tradingStatus === 1 ? '' : 'grayscale-[50%]'}`}
-          alt="굿즈 이미지"
-        />
-        <div className="px-[20px] py-[20px]">
-          <p className="truncate text-[15px]">{data.goodsName}</p>
-          <p className="mt-[5px] text-[19px] font-medium truncate">
-            {data.minPrice.toLocaleString()}{' '}
-            <span className="text-[17px]">원</span>
+          {isLiked ? (
+            <LiaHeartSolid className="w-[30px] h-[32px] ml-[13px] text-red-500" />
+          ) : (
+            <LiaHeart className="w-[30px] h-[32px] ml-[13px] text-stone-400" />
+          )}
+        </button>
+        <Link href={`/goods/${goodsCode}`}>
+          <p
+            className={`absolute z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-base text-center text-white leading-4 whitespace-pre-line ${data.tradingStatus === 0 || data.tradingStatus === 1 ? 'hidden' : ''}`}
+          >
+            경매가 종료된 상품입니다.
           </p>
-          {data.tradingStatus === 0 && (
-            <p className="text-sm text-stone-500">경매 전</p>
-          )}
-          {data.tradingStatus === 1 && (
-            <p className="text-sm text-stone-500">경매 중</p>
-          )}
-          {data.tradingStatus >= 2 && (
-            <p className="text-sm text-stone-500">경매종료</p>
-          )}
-        </div>
-      </Link>
-    </div>
+          <Image
+            src={ImageUrl}
+            width={0}
+            height={0}
+            sizes="100vw"
+            className={`rounded-t-2xl max-h-[300px] w-full h-auto object-cover aspect-square ${data.tradingStatus === 0 || data.tradingStatus === 1 ? '' : 'grayscale-[50%]'}`}
+            alt="굿즈 이미지"
+          />
+          <div className="px-[20px] py-[20px]">
+            <p className="truncate text-[15px]">{data.goodsName}</p>
+            <p className="mt-[5px] text-[19px] font-medium truncate">
+              {data.minPrice.toLocaleString()}{' '}
+              <span className="text-[17px]">원</span>
+            </p>
+            {data.tradingStatus === 0 && (
+              <p className="text-sm text-stone-500">경매 전</p>
+            )}
+            {data.tradingStatus === 1 && (
+              <p className="text-sm text-stone-500">경매 중</p>
+            )}
+            {data.tradingStatus >= 2 && (
+              <p className="text-sm text-stone-500">경매종료</p>
+            )}
+          </div>
+        </Link>
+      </div>
+    </motion.div>
   )
 }

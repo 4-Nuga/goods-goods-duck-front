@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 interface NoticeListType {
   id: number
   title: string
@@ -14,6 +16,9 @@ export default async function NoticeDetail({
   const { noticeId } = params
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API}/v1/etc-n/notice/${noticeId}`,
+    {
+      cache: 'no-cache',
+    },
   )
   const data = await res.json()
   const notice = data.result as NoticeListType
@@ -28,8 +33,15 @@ export default async function NoticeDetail({
       <div className="border-b pb-4 mb-4">
         <h1 className="text-xl font-bold">{notice.title}</h1>
       </div>
-      <div className="border-b pb-4 mb-4 min-h-[400px]">
-        <p className="text-gray-800 leading-relaxed">{notice.content}</p>
+      <div className="border-b pb-4 mb-4">
+        <Image
+          src={notice.content}
+          alt="공지사항 이미지"
+          sizes="100vw"
+          width={0}
+          height={0}
+          className="w-full h-auto"
+        />
       </div>
       <div className="border-b pb-4 mb-4 flex justify-end items-center">
         <div className="text-gray-600 text-sm">

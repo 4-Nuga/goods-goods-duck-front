@@ -114,9 +114,9 @@ export default function ChatView({
           eventSource.close()
 
           // Reconnect after a delay
-          setTimeout(() => {
-            connectToSSE()
-          }, 5000) // Reconnect after 5 seconds
+          // setTimeout(() => {
+          //   connectToSSE()
+          // }, 5000) // Reconnect after 5 seconds
         }
 
         return eventSource

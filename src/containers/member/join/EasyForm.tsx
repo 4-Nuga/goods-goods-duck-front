@@ -1,5 +1,4 @@
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useEffect } from 'react'
 import NicknameInput from '@/containers/member/join/NicknameInput'
 import PhoneVerification from '@/containers/member/join/PhoneVerification'
 import ProfileImgArea from '@/containers/member/join/ProfileImgArea'
@@ -23,15 +22,10 @@ export default function EasyForm() {
     profileImage,
     favoriteCategory,
     nickname,
-    userId,
-    password,
     phoneNumber,
 
     isValidNick,
     isVerified,
-
-    setUserId,
-    setPassword,
     resetJoinState,
   } = useJoinStore()
   const {
@@ -92,8 +86,8 @@ export default function EasyForm() {
       profileImageUrl,
       favoriteCategory,
       nickname,
-      userId,
-      password,
+      id!,
+      provider!,
       phoneNumber,
     )
 
@@ -104,12 +98,6 @@ export default function EasyForm() {
     resetJoinState()
     resetErrorState()
   }
-
-  useEffect(() => {
-    setUserId(id!)
-    setPassword(provider!)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
 
   return (
     <div className="w-full flex-shrink-0">
@@ -145,6 +133,15 @@ export default function EasyForm() {
           </button>
         </div>
       </span>
+      <p className="text-slate-500 text-sm mt-5">
+        * 최초 소셜 회원가입 시에만 받는 정보에요.
+      </p>
+      <p className="text-slate-500 text-sm">
+        * 앞으로는 소셜 아이콘 클릭만으로 간편 로그인 할 수 있어요.
+      </p>
+      <p className="text-slate-500 text-sm">
+        * 기존 회원이라면 2가지 로그인 방법을 모두 사용할 수 있습니다.
+      </p>
     </div>
   )
 }

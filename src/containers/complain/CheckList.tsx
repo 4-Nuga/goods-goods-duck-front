@@ -19,7 +19,7 @@ export default function CheckList({
   }
 
   return (
-    <div className="mt-[17px]">
+    <div className="mt-[13px]">
       <ul>
         {complainList.map((item) => (
           <li key={item.id} className="relative mt-[15px] first:mt-0">
@@ -34,9 +34,9 @@ export default function CheckList({
                 className="hidden"
               />
               <IoCheckmark
-                className={`absolute inline-block w-[30px] h-[31px] ${complainReason === item.description ? ' text-yellow-400' : ' text-black'}`}
+                className={`absolute inline-block w-[30px] h-[25px] ${complainReason === item.description ? ' text-yellow-400' : ' text-black'}`}
               />
-              <p className="pl-[40px] text-[19px] leading-[31px]">
+              <p className="pl-[40px] text-[17px] leading-[25px]">
                 {item.description}
               </p>
             </label>
